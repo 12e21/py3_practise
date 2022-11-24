@@ -15,6 +15,23 @@ def encrypto_xor(plaintext,key):
     ciphertext_list = [chr(num) for num in plainnumber_xor_list]
     ciphertext = ''.join(ciphertext_list)
     return ciphertext
+#此函数用于异或式加密解密(多字符密钥)
+def encrypto_xor_bits(plaintext,key):
+    key=[int(num) for num in list(key) ]
+    plaintext_list = list(plaintext)
+    plainnumber_list = [ord(char) for char in plaintext_list]
+    turn=0
+    plainnumber_xor_list=[]
+    for i in range(len(plaintext)):
+        if turn==len(key)-1:
+            turn=0
+
+        plainnumber_xor_list.append(plainnumber_list[i]^key[turn])
+        turn=turn+1
+    ciphertext_list = [chr(num) for num in plainnumber_xor_list]
+    ciphertext = ''.join(ciphertext_list)
+    return ciphertext
+
 
 #本函数用于破解xor加密文本
 def crack_xor(cipher_text,crack_key_count):
@@ -30,8 +47,10 @@ def crack_xor(cipher_text,crack_key_count):
 
 
 
+
 if __name__=='__main__':
     print('加密模块正在运行\n')
+    encrypto_xor_bits('password: 123','345')
 else:
     print('加密模块被导入\n')
 
